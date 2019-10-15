@@ -29,5 +29,7 @@ namespace MIS4200_Team7.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MIS4200_Team7.Models.Performance> Performances { get; set; }
     }
 }

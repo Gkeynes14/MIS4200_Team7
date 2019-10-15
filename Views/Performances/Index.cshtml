@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MIS4200_Team7.Models.Performance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ratingDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateRated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ratingDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateRated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.performanceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.performanceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.performanceID })
+        </td>
+    </tr>
+}
+
+</table>
