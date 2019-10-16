@@ -11,7 +11,7 @@ namespace MIS4200_Team7.Migrations.MISContext
         {
             AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Migrations\MISContext";
-            ContextKey = "MIS4200_Team7.DAL.MISContext";
+            ContextKey = "MIS4200_Team7.DAL.MIS4200Context";
             AutomaticMigrationDataLossAllowed = true;
         }
 
