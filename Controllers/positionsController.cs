@@ -6,111 +6,112 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using MIS4200_Team7.DAL;
 using MIS4200_Team7.Models;
 
 namespace MIS4200_Team7.Controllers
 {
-    public class PerformancesController : Controller
+    public class positionsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private MIS4200Context db = new MIS4200Context();
 
-        // GET: Performances
+        // GET: positions
         public ActionResult Index()
         {
-            return View(db.Performances.ToList());
+            return View(db.positions.ToList());
         }
 
-        // GET: Performances/Details/5
+        // GET: positions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Performance performance = db.Performances.Find(id);
-            if (performance == null)
+            position position = db.positions.Find(id);
+            if (position == null)
             {
                 return HttpNotFound();
             }
-            return View(performance);
+            return View(position);
         }
 
-        // GET: Performances/Create
+        // GET: positions/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Performances/Create
+        // POST: positions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "performanceID,ratingDescription,dateRated")] Performance performance)
+        public ActionResult Create([Bind(Include = "positionID,positionTitle,positionDescription")] position position)
         {
             if (ModelState.IsValid)
             {
-                db.Performances.Add(performance);
+                db.positions.Add(position);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(performance);
+            return View(position);
         }
 
-        // GET: Performances/Edit/5
+        // GET: positions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Performance performance = db.Performances.Find(id);
-            if (performance == null)
+            position position = db.positions.Find(id);
+            if (position == null)
             {
                 return HttpNotFound();
             }
-            return View(performance);
+            return View(position);
         }
 
-        // POST: Performances/Edit/5
+        // POST: positions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "performanceID,ratingDescription,dateRated")] Performance performance)
+        public ActionResult Edit([Bind(Include = "positionID,positionTitle,positionDescription")] position position)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(performance).State = EntityState.Modified;
+                db.Entry(position).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(performance);
+            return View(position);
         }
 
-        // GET: Performances/Delete/5
+        // GET: positions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Performance performance = db.Performances.Find(id);
-            if (performance == null)
+            position position = db.positions.Find(id);
+            if (position == null)
             {
                 return HttpNotFound();
             }
-            return View(performance);
+            return View(position);
         }
 
-        // POST: Performances/Delete/5
+        // POST: positions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Performance performance = db.Performances.Find(id);
-            db.Performances.Remove(performance);
+            position position = db.positions.Find(id);
+            db.positions.Remove(position);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
