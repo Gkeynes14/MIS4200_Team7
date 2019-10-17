@@ -22,8 +22,13 @@ namespace MIS4200_Team7.Models
         public string firstName { get; set; }
         [Required]
         [Display(Name = "Last Name")]
-        public string lastName { get; set; }        public string fullName { get { return lastName + ", " + firstName; } }        [Required]
+        public string lastName { get; set; }
+
+        public string fullName { get { return lastName + ", " + firstName; } }
+
+        [Required]
         [Display(Name = "Hire Date")]
+        [DataType(DataType.Date)]
         public string hireDate { get; set; }
 
         //link to position
