@@ -6,8 +6,16 @@
 
 <h2>Profiles</h2>
 
+@using (Html.BeginForm("Index", "userProfiles", FormMethod.Get))
+{
+    <p>
+        Find by name (First, Last or Both): @Html.TextBox("searchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <p>
-    
+
 </p>
 <table class="table">
     <tr>
@@ -29,29 +37,30 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Position.positionTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.firstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.hireDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.profileID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.profileID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.profileID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position.positionTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hireDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.profileID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.profileID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.profileID })
+            </td>
+        </tr>
+    }
 
 </table>
