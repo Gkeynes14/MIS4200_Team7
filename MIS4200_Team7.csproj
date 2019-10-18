@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaderboardsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\positionsController.cs" />
     <Compile Include="Controllers\userProfilesController.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Migrations\MISContext\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Leaderboard.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\position.cs" />
     <Compile Include="Models\userProfile.cs" />
@@ -252,6 +254,11 @@
     <Content Include="Views\userProfiles\Edit.cshtml" />
     <Content Include="Views\userProfiles\Index.cshtml" />
     <Content Include="Views\Leaderboard.cshtml" />
+    <Content Include="Views\Leaderboards\Create.cshtml" />
+    <Content Include="Views\Leaderboards\Delete.cshtml" />
+    <Content Include="Views\Leaderboards\Details.cshtml" />
+    <Content Include="Views\Leaderboards\Edit.cshtml" />
+    <Content Include="Views\Leaderboards\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

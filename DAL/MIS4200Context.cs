@@ -31,6 +31,8 @@ namespace MIS4200_Team7.DAL
         {
             base.OnModelCreating(modelBuilder);
         }
+
+        public System.Data.Entity.DbSet<MIS4200_Team7.Models.Leaderboard> Leaderboards { get; set; }
     }
     
 }

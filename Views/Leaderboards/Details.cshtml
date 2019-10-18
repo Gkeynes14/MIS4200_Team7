@@ -1,0 +1,18 @@
+﻿@model MIS4200_Team7.Models.Leaderboard
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Leaderboard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.leaderboardId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
