@@ -1,0 +1,26 @@
+﻿@model MIS4200_Team7.Models.recognition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>recognition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.recognitionMessage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recognitionMessage)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.recognitionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

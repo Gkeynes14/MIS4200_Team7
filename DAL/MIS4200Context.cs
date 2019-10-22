@@ -33,6 +33,8 @@ namespace MIS4200_Team7.DAL
         }
 
         public System.Data.Entity.DbSet<MIS4200_Team7.Models.Leaderboard> Leaderboards { get; set; }
+
+        public System.Data.Entity.DbSet<MIS4200_Team7.Models.recognition> recognitions { get; set; }
     }
     
 }

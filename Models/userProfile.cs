@@ -37,5 +37,10 @@ namespace MIS4200_Team7.Models
         public int positionID { get; set; }
         public virtual position Position { get; set; }
 
+        //link to recognition
+      
+        public int recognitionID { get; set; }
+        public virtual recognition Recognition { get; set; }
+
     }
 }
