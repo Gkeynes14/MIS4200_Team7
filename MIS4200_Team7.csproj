@@ -183,6 +183,7 @@
     <Compile Include="Models\Leaderboard.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\position.cs" />
+    <Compile Include="Models\recognition.cs" />
     <Compile Include="Models\userProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
