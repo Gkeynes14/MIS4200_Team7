@@ -24,6 +24,7 @@ namespace MIS4200_Team7.Models
         [Display(Name = "Last Name")]
         public string lastName { get; set; }
 
+        [Display(Name = "Full Name")]
         public string fullName { get { return lastName + ", " + firstName; } }
 
         [Required]
@@ -38,9 +39,8 @@ namespace MIS4200_Team7.Models
         public virtual position Position { get; set; }
 
         //link to recognition
-      
-        public int recognitionID { get; set; }
-        public virtual recognition Recognition { get; set; }
+         
+        public ICollection<recognition> recognitions { get; set; }
 
     }
 }

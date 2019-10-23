@@ -11,11 +11,27 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.recognitionMessage)
+            @Html.DisplayNameFor(model => model.UserProfile.email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.recognitionMessage)
+            @Html.DisplayFor(model => model.UserProfile.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Value.valueName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value.valueName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recognitionDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recognitionDescription)
         </dd>
 
     </dl>

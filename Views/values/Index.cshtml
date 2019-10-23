@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MIS4200_Team7.Models.value>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.valueName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valueDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.valueName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valueDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.valueID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.valueID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.valueID })
+        </td>
+    </tr>
+}
+
+</table>

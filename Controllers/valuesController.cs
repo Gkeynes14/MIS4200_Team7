@@ -11,116 +11,107 @@ using MIS4200_Team7.Models;
 
 namespace MIS4200_Team7.Controllers
 {
-    public class recognitionsController : Controller
+    public class valuesController : Controller
     {
         private MIS4200Context db = new MIS4200Context();
 
-        // GET: recognitions
+        // GET: values
         public ActionResult Index()
         {
-            var recognitions = db.recognitions.Include(r => r.UserProfile).Include(r => r.Value);
-            return View(recognitions.ToList());
+            return View(db.values.ToList());
         }
 
-        // GET: recognitions/Details/5
+        // GET: values/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            recognition recognition = db.recognitions.Find(id);
-            if (recognition == null)
+            value value = db.values.Find(id);
+            if (value == null)
             {
                 return HttpNotFound();
             }
-            return View(recognition);
+            return View(value);
         }
 
-        // GET: recognitions/Create
+        // GET: values/Create
         public ActionResult Create()
         {
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName");
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName");
             return View();
         }
 
-        // POST: recognitions/Create
+        // POST: values/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription")] recognition recognition)
+        public ActionResult Create([Bind(Include = "valueID,valueName,valueDescription")] value value)
         {
             if (ModelState.IsValid)
             {
-                db.recognitions.Add(recognition);
+                db.values.Add(value);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
-            return View(recognition);
+            return View(value);
         }
 
-        // GET: recognitions/Edit/5
+        // GET: values/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            recognition recognition = db.recognitions.Find(id);
-            if (recognition == null)
+            value value = db.values.Find(id);
+            if (value == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
-            return View(recognition);
+            return View(value);
         }
 
-        // POST: recognitions/Edit/5
+        // POST: values/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription")] recognition recognition)
+        public ActionResult Edit([Bind(Include = "valueID,valueName,valueDescription")] value value)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recognition).State = EntityState.Modified;
+                db.Entry(value).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
-            return View(recognition);
+            return View(value);
         }
 
-        // GET: recognitions/Delete/5
+        // GET: values/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            recognition recognition = db.recognitions.Find(id);
-            if (recognition == null)
+            value value = db.values.Find(id);
+            if (value == null)
             {
                 return HttpNotFound();
             }
-            return View(recognition);
+            return View(value);
         }
 
-        // POST: recognitions/Delete/5
+        // POST: values/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            recognition recognition = db.recognitions.Find(id);
-            db.recognitions.Remove(recognition);
+            value value = db.values.Find(id);
+            db.values.Remove(value);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
