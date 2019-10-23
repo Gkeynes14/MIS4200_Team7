@@ -68,15 +68,10 @@ namespace MIS4200_Team7.Controllers
                 Guid.TryParse(User.Identity.GetUserId(), out memberID);
                 userProfile.profileID = memberID;
                 db.userProfiles.Add(userProfile);
-                try
-                {
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                {
-                    return View("DuplicateUser");
-                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+                
+                
             }
 
             ViewBag.positionID = new SelectList(db.positions, "positionID", "positionTitle", userProfile.positionID);
