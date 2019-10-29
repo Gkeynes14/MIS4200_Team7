@@ -40,7 +40,7 @@ namespace MIS4200_Team7.Controllers
         // GET: recognitions/Create
         public ActionResult Create()
         {
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName");
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email");
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName");
             return View();
         }
@@ -59,7 +59,7 @@ namespace MIS4200_Team7.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
@@ -76,7 +76,7 @@ namespace MIS4200_Team7.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
@@ -94,7 +94,7 @@ namespace MIS4200_Team7.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
