@@ -23,6 +23,8 @@ namespace MIS4200_Team7.DAL
             public DbSet<position> positions { get; set; }
             public DbSet<value> values { get; set; }
             public DbSet<recognition> recognitions { get; set; }
+            public DbSet<Leaderboard> leaderboards { get; set; }
+
 
 
 
