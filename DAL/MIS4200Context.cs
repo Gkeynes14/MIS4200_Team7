@@ -21,6 +21,10 @@ namespace MIS4200_Team7.DAL
             // and is the name used to reference the entity in code
             public DbSet<userProfile> userProfiles { get; set; }
             public DbSet<position> positions { get; set; }
+            public DbSet<value> values { get; set; }
+            public DbSet<recognition> recognitions { get; set; }
+
+
 
         /*public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -32,11 +36,7 @@ namespace MIS4200_Team7.DAL
             base.OnModelCreating(modelBuilder);
         }
 
-        public System.Data.Entity.DbSet<MIS4200_Team7.Models.Leaderboard> Leaderboards { get; set; }
-
-        public System.Data.Entity.DbSet<MIS4200_Team7.Models.recognition> recognitions { get; set; }
-
-        public System.Data.Entity.DbSet<MIS4200_Team7.Models.value> values { get; set; }
+        
     }
     
 }
