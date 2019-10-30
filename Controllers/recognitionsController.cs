@@ -50,10 +50,11 @@ namespace MIS4200_Team7.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription")] recognition recognition)
+        public ActionResult Create([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
         {
             if (ModelState.IsValid)
             {
+                recognition.Now = DateTime.Now;
                 db.recognitions.Add(recognition);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -86,7 +87,7 @@ namespace MIS4200_Team7.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription")] recognition recognition)
+        public ActionResult Edit([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
         {
             if (ModelState.IsValid)
             {

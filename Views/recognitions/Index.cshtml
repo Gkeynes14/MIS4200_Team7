@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<MIS4200_Team7.Models.recognition>
 
 @{
-    ViewBag.Title = "Recognitions";
+    ViewBag.Title = "Index";
 }
 
-<h2>Recognitions</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -20,6 +20,9 @@
         <th>
             @Html.DisplayNameFor(model => model.recognitionDescription)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Now)
+        </th>
         <th></th>
     </tr>
 
@@ -33,6 +36,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.recognitionDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Now)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.recognitionID }) |
