@@ -39,9 +39,6 @@ namespace MIS4200_Team7.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            userProfile userProfile = db.userProfiles.Find(id);
-            recognition userRecognition = db.recognitions.Where(u=>u.profileID=id);
-            ViewBag.userRecognition=userRecognition;
             if (userProfile == null)
             {
                 return HttpNotFound();
