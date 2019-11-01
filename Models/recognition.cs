@@ -27,10 +27,7 @@ namespace MIS4200_Team7.Models
         [Required]
         public string recognitionDescription { get; set; }
 
-        public static DateTime Now { get; }
-
-
-
+        public DateTime Now { get; set; }
 
     }
 }
