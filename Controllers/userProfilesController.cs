@@ -39,6 +39,9 @@ namespace MIS4200_Team7.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            userProfile userProfile = db.userProfiles.Find(id);
+
             if (userProfile == null)
             {
                 return HttpNotFound();
