@@ -32,9 +32,8 @@ namespace MIS4200_Team7.Models
         [Required]
         public string recognitionDescription { get; set; }
 
-        [Display(Name = "Recognition Date")]
+        [DisplayFormat(DataFormatString ="{0:MM/dd/yyyy hh:mm}", ApplyFormatInEditMode =true)]
         public DateTime Now { get; set; }
-
 
     }
 }
