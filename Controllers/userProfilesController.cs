@@ -19,16 +19,25 @@ namespace MIS4200_Team7.Controllers
         // GET: userProfiles
         public ActionResult Index(string searchString)
         {
-            var testusers = from u in db.userProfiles select u;
-             if (!String.IsNullOrEmpty(searchString))
-                 {
-                testusers = testusers.Where(u =>
-               u.lastName.Contains(searchString)
-               || u.firstName.Contains(searchString));
-                // if here, users were found so view them
-                return View(testusers.ToList());
-                 }
-            return View(db.userProfiles.ToList());
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var testusers = from u in db.userProfiles select u;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    testusers = testusers.Where(u =>
+                   u.lastName.Contains(searchString)
+                   || u.firstName.Contains(searchString));
+                    // if here, users were found so view them
+                    return View(testusers.ToList());
+                }
+                return View(db.userProfiles.ToList());
+            }
+            else
+            {
+                return View("NotAuthorized");
+            }
+            
              
     }
 

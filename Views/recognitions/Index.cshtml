@@ -12,10 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.UserProfile.email)
+            @Html.DisplayNameFor(model => model.profileID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Value.valueName)
+            @Html.DisplayNameFor(model => model.valueID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recognizerID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.recognitionDescription)
@@ -29,10 +32,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.UserProfile.email)
+            @Html.DisplayFor(modelItem => item.UserProfile.fullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Value.valueName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recognizerID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.recognitionDescription)

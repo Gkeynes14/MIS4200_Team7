@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using MIS4200_Team7.DAL;
 using MIS4200_Team7.Models;
 
@@ -40,7 +41,10 @@ namespace MIS4200_Team7.Controllers
         // GET: recognitions/Create
         public ActionResult Create()
         {
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email");
+            string empID = User.Identity.GetUserId();
+            SelectList employees = new SelectList(db.userProfiles, "profileID", "fullName");
+            employees = new SelectList(employees.Where(x => x.Value != empID).ToList(), "Value", "Text");
+            ViewBag.profileID = employees;
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName");
             return View();
         }
@@ -50,17 +54,18 @@ namespace MIS4200_Team7.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
+        public ActionResult Create([Bind(Include = "recognitionID,recognizerID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
         {
             if (ModelState.IsValid)
             {
                 recognition.Now = DateTime.Now;
+                recognition.recognizerID = User.Identity.GetUserId();
                 db.recognitions.Add(recognition);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
@@ -87,15 +92,16 @@ namespace MIS4200_Team7.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "recognitionID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
+        public ActionResult Edit([Bind(Include = "recognitionID,recognizerID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
         {
             if (ModelState.IsValid)
             {
+                recognition.Now = DateTime.Now;
                 db.Entry(recognition).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }

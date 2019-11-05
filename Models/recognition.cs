@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace MIS4200_Team7.Models
     {
 
         [Key] public int recognitionID { get; set; }
+
+
+        [Display(Name = "Recognizer")]
+        public string recognizerID { get; set; }
 
         //link to user
         [Display(Name = "Employee Being Recognized")]
