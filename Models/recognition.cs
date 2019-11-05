@@ -32,7 +32,9 @@ namespace MIS4200_Team7.Models
         [Required]
         public string recognitionDescription { get; set; }
 
+        [Display(Name = "Recognition Date")]
         public DateTime Now { get; set; }
+
 
     }
 }
