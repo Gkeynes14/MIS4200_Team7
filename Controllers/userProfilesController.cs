@@ -50,6 +50,7 @@ namespace MIS4200_Team7.Controllers
             }
 
             userProfile userProfile = db.userProfiles.Find(id);
+            //recognition userRecognition = db.recognitions.Where(p =>);
 
             if (userProfile == null)
             {
