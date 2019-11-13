@@ -59,7 +59,13 @@ namespace MIS4200_Team7.Controllers
             if (ModelState.IsValid)
             {
                 recognition.Now = DateTime.Now;
-                recognition.recognizerID = User.Identity.GetUserId();
+
+                //recognition.recognizerID = User.Identity.GetUserId();
+                Guid recognizerID;
+                Guid.TryParse(User.Identity.GetUserId(), out recognizerID);
+                recognition.recognizerID = recognizerID;
+
+
                 db.recognitions.Add(recognition);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -14,7 +14,8 @@ namespace MIS4200_Team7.Models
 
 
         [Display(Name = "Recognizer")]
-        public string recognizerID { get; set; }
+        public Guid recognizerID { get; set; }
+        
 
         //link to user
         [Display(Name = "Employee Being Recognized")]
