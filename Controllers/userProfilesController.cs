@@ -49,7 +49,7 @@ namespace MIS4200_Team7.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            userProfile userProfile = db.userProfiles.Find(id);
+            var userProfile = db.userProfiles.Where(u=> u.profileID==id).Include(u=>u.recognitions);
             //recognition userRecognition = db.recognitions.Where(p =>);
 
             if (userProfile == null)

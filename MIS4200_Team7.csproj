@@ -276,6 +276,7 @@
     <Content Include="Views\recognitions\Edit.cshtml" />
     <Content Include="Views\recognitions\Index.cshtml" />
     <Content Include="Views\userProfiles\NotAuthorized.cshtml" />
+    <Content Include="Views\ProfileDetailRecognitions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

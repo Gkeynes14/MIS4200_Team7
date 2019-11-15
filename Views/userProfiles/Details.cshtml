@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Details Test</h2>
 
 <div>
     <h4>User Profile</h4>
@@ -51,6 +51,13 @@
         </dd>
 
     </dl>
+    trying partial
+    @{ 
+        var ProfileID = Model.profileID;
+        var recognitions = Model.recognitions.Where(u => u.profileID == ProfileID).ToList();
+    }
+    @Html.Partial("ProfileDetailRecogntions",recognitions)
+
 </div>
 
 @*<table class="table">

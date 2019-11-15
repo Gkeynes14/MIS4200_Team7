@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MIS4200_Team7.Models.recognition>
+
+<p>
+   got here
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfile.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Value.valueName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recognizerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.recognitionDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Now)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserProfile.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Value.valueName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recognizerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.recognitionDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Now)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.recognitionID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.recognitionID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.recognitionID })
+        </td>
+    </tr>
+}
+
+</table>
