@@ -54,7 +54,8 @@
     trying partial
     @{ 
         var ProfileID = Model.profileID;
-        var recognitions = Model.recognitions.Where(u => u.profileID == ProfileID).ToList();
+        var recognitions = Model.recognitions.Where(u => u.profileID == ProfileID);
+        var recList = recognitions.ToList();
     }
     @Html.Partial("ProfileDetailRecogntions",recognitions)
 
