@@ -1,0 +1,58 @@
+﻿@model MIS4200_Team7.Models.recognition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>recognition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserProfile.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfile.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Value.valueName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Value.valueName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recognizerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recognizerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.recognitionDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.recognitionDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Now)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Now)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.recognitionID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -6,24 +6,23 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
 using MIS4200_Team7.DAL;
 using MIS4200_Team7.Models;
 
 namespace MIS4200_Team7.Controllers
 {
-    public class recognitionsController : Controller
+    public class Leaderboard1Controller : Controller
     {
         private MIS4200Context db = new MIS4200Context();
 
-        // GET: recognitions
+        // GET: Leaderboard1
         public ActionResult Index()
         {
             var recognitions = db.recognitions.Include(r => r.UserProfile).Include(r => r.Value);
             return View(recognitions.ToList());
         }
 
-        // GET: recognitions/Details/5
+        // GET: Leaderboard1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,18 +37,15 @@ namespace MIS4200_Team7.Controllers
             return View(recognition);
         }
 
-        // GET: recognitions/Create
+        // GET: Leaderboard1/Create
         public ActionResult Create()
         {
-            string empID = User.Identity.GetUserId();
-            SelectList employees = new SelectList(db.userProfiles, "profileID", "fullName");
-            employees = new SelectList(employees.Where(x => x.Value != empID).ToList(), "Value", "Text");
-            ViewBag.profileID = employees;
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email");
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName");
             return View();
         }
 
-        // POST: recognitions/Create
+        // POST: Leaderboard1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -58,25 +54,17 @@ namespace MIS4200_Team7.Controllers
         {
             if (ModelState.IsValid)
             {
-                recognition.Now = DateTime.Now;
-
-                //recognition.recognizerID = User.Identity.GetUserId();
-                Guid recognizerID;
-                Guid.TryParse(User.Identity.GetUserId(), out recognizerID);
-                recognition.recognizerID = recognizerID;
-
-
                 db.recognitions.Add(recognition);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
 
-        // GET: recognitions/Edit/5
+        // GET: Leaderboard1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,7 +81,7 @@ namespace MIS4200_Team7.Controllers
             return View(recognition);
         }
 
-        // POST: recognitions/Edit/5
+        // POST: Leaderboard1/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -102,17 +90,16 @@ namespace MIS4200_Team7.Controllers
         {
             if (ModelState.IsValid)
             {
-                recognition.Now = DateTime.Now;
                 db.Entry(recognition).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
             ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
 
-        // GET: recognitions/Delete/5
+        // GET: Leaderboard1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -127,7 +114,7 @@ namespace MIS4200_Team7.Controllers
             return View(recognition);
         }
 
-        // POST: recognitions/Delete/5
+        // POST: Leaderboard1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -137,11 +124,6 @@ namespace MIS4200_Team7.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        //public ActionResult Leaderboard(int? id)
-        //{
-        //    var rec = db.recognitions.Where(r => r.profileID == id );
-        //}
 
         protected override void Dispose(bool disposing)
         {

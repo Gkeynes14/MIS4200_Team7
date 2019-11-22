@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Leaderboard1Controller.cs" />
     <Compile Include="Controllers\LeaderboardsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\positionsController.cs" />
@@ -277,6 +278,12 @@
     <Content Include="Views\recognitions\Index.cshtml" />
     <Content Include="Views\userProfiles\NotAuthorized.cshtml" />
     <Content Include="Views\ProfileDetailRecognitions.cshtml" />
+    <Content Include="Views\recognitions\Leaderboard.cshtml" />
+    <Content Include="Views\Leaderboard1\Create.cshtml" />
+    <Content Include="Views\Leaderboard1\Delete.cshtml" />
+    <Content Include="Views\Leaderboard1\Details.cshtml" />
+    <Content Include="Views\Leaderboard1\Edit.cshtml" />
+    <Content Include="Views\Leaderboard1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
