@@ -50,7 +50,31 @@ namespace MIS4200_Team7.Controllers
             }
 
             var userProfile = db.userProfiles.Find(id);
-            //recognition userRecognition = db.recognitions.Where(p =>);
+            var rec = db.recognitions.Where(r => r.profileID == id);
+            var recList = rec.ToList();
+            ViewBag.rec = recList;
+
+            //calculations for leadboard
+            var totalCnt = recList.Count(); //counts all the recognitions for that person
+            var rec1Cnt = recList.Where(r => r.award == recognition.CoreValue.Excellence).Count();
+            // counts all the Excellence recognitions
+            // notice how the Enum values are references, class.enum.value
+            // the next two lines show another way to do the same counting
+            var rec2Cnt = recList.Count(r => r.award == recognition.CoreValue.Culture);
+            var rec3Cnt = recList.Count(r => r.award == recognition.CoreValue.Integrity);
+            var rec4Cnt = recList.Count(r => r.award == recognition.CoreValue.Stewardship);
+            var rec5Cnt = recList.Count(r => r.award == recognition.CoreValue.Innovate);
+            var rec6Cnt = recList.Count(r => r.award == recognition.CoreValue.Passion);
+            var rec7Cnt = recList.Count(r => r.award == recognition.CoreValue.Balance);
+            // copy the values into the ViewBag
+            ViewBag.total = totalCnt;
+            ViewBag.Excellence = rec1Cnt;
+            ViewBag.Culture = rec2Cnt;
+            ViewBag.Integrity = rec3Cnt;
+            ViewBag.Stewardship = rec4Cnt;
+            ViewBag.Innovate = rec5Cnt;
+            ViewBag.Passion = rec6Cnt;
+            ViewBag.Balance = rec7Cnt;
 
             if (userProfile == null)
             {

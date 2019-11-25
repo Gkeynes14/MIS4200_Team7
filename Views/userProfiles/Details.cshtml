@@ -51,28 +51,30 @@
         </dd>
 
     </dl>
-    trying partial
-    @{ 
-        var ProfileID = Model.profileID;
-        var recognitions = Model.recognitions.Where(u => u.profileID == ProfileID);
-        var recList = recognitions.ToList();
-    }
-    @Html.Partial("ProfileDetailRecogntions",recognitions)
-    @*note*@
 
 </div>
+<br />
+<br />
+@{
+    var total = ViewBag.total;
+    var excellence = ViewBag.Excellence;
+    var culture = ViewBag.Culture;
+    var integrity = ViewBag.Integrity;
+    var stewardship = ViewBag.Stewardship;
+    var innovate = ViewBag.Innovate;
+    var passion = ViewBag.Passion;
+    var balance = ViewBag.Balance;
+    <h2>Total recognitions received = @total</h2>
+    <h3>Excellence awards = @excellence</h3>
+    <h3>Culture awards = @culture</h3>
+    <h3>Integrity awards = @integrity</h3>
+    <h3>Stewardship awards = @stewardship</h3>
+    <h3>Innovate awards = @innovate</h3>
+    <h3>Passion awards = @passion</h3>
+    <h3>Balance awards = @balance</h3>
+}
+    <h3>@Html.ActionLink("View Recognitions", "Index", "Recognitions", new { @searchString = Model.firstName}, null) </h3>
 
-@*<table class="table">
-    <tr>
-        <th>@Html.DisplayNameFor(model => model.recognitions)</th>
-    </tr>
-    
-    <tr>   
-    <td>@Html.DisplayFor(modelItem => )</td>
-    </tr>
-
-
-</table>*@
 
 
 <p>

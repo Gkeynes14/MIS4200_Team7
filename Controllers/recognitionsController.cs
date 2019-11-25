@@ -17,10 +17,26 @@ namespace MIS4200_Team7.Controllers
         private MIS4200Context db = new MIS4200Context();
 
         // GET: recognitions
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            var recognitions = db.recognitions.Include(r => r.UserProfile).Include(r => r.Value);
-            return View(recognitions.ToList());
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                var testusers = from u in db.recognitions select u;
+                if (!String.IsNullOrEmpty(searchString))
+                {
+                    
+                    testusers = testusers.Where(u => u.UserProfile.lastName.Contains(searchString) || u.UserProfile.firstName.Contains(searchString));
+                    // if here, users were found so view them
+                    return View(testusers.ToList());
+                }
+                return View(db.recognitions.ToList());
+            }
+            else
+            {
+                return View("NotAuthorized");
+            }
+
         }
 
         // GET: recognitions/Details/5
@@ -45,7 +61,6 @@ namespace MIS4200_Team7.Controllers
             SelectList employees = new SelectList(db.userProfiles, "profileID", "fullName");
             employees = new SelectList(employees.Where(x => x.Value != empID).ToList(), "Value", "Text");
             ViewBag.profileID = employees;
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName");
             return View();
         }
 
@@ -54,17 +69,17 @@ namespace MIS4200_Team7.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "recognitionID,recognizerID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
+        public ActionResult Create([Bind(Include = "recognitionID,recognizerID,profileID,recognitionDescription,Now,award")] recognition recognition)
         {
             if (ModelState.IsValid)
             {
+                //timestamp for recognition
                 recognition.Now = DateTime.Now;
 
-                //recognition.recognizerID = User.Identity.GetUserId();
+                //retrieves id of person leaving recognition
                 Guid recognizerID;
                 Guid.TryParse(User.Identity.GetUserId(), out recognizerID);
                 recognition.recognizerID = recognizerID;
-
 
                 db.recognitions.Add(recognition);
                 db.SaveChanges();
@@ -72,7 +87,6 @@ namespace MIS4200_Team7.Controllers
             }
 
             ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
 
@@ -88,8 +102,7 @@ namespace MIS4200_Team7.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "email", recognition.profileID);
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
+            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
             return View(recognition);
         }
 
@@ -98,17 +111,18 @@ namespace MIS4200_Team7.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "recognitionID,recognizerID,profileID,valueID,recognitionDescription,Now")] recognition recognition)
+        public ActionResult Edit([Bind(Include = "recognitionID,recognizerID,profileID,recognitionDescription,Now,award")] recognition recognition)
         {
             if (ModelState.IsValid)
             {
+                //timestamp for recognition
                 recognition.Now = DateTime.Now;
+
                 db.Entry(recognition).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
-            ViewBag.valueID = new SelectList(db.values, "valueID", "valueName", recognition.valueID);
             return View(recognition);
         }
 
@@ -145,6 +159,39 @@ namespace MIS4200_Team7.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: recognitions
+        public ActionResult LeaderBoard()
+        {
+            
+            var rec = db.recognitions.Include(r => r.UserProfile);
+            var recList = rec.ToList();
+            ViewBag.rec = recList;
+
+            //calculations for leadboard
+            var totalCnt = recList.Count(); //counts all the recognitions for that person
+            var rec1Cnt = recList.Where(r => r.award == recognition.CoreValue.Excellence).Count();
+            // counts all the Excellence recognitions
+            // notice how the Enum values are references, class.enum.value
+            // the next two lines show another way to do the same counting
+            var rec2Cnt = recList.Count(r => r.award == recognition.CoreValue.Culture);
+            var rec3Cnt = recList.Count(r => r.award == recognition.CoreValue.Integrity);
+            var rec4Cnt = recList.Count(r => r.award == recognition.CoreValue.Stewardship);
+            var rec5Cnt = recList.Count(r => r.award == recognition.CoreValue.Innovate);
+            var rec6Cnt = recList.Count(r => r.award == recognition.CoreValue.Passion);
+            var rec7Cnt = recList.Count(r => r.award == recognition.CoreValue.Balance);
+            // copy the values into the ViewBag
+            ViewBag.total = totalCnt;
+            ViewBag.Excellence = rec1Cnt;
+            ViewBag.Culture = rec2Cnt;
+            ViewBag.Integrity = rec3Cnt;
+            ViewBag.Stewardship = rec4Cnt;
+            ViewBag.Innovate = rec5Cnt;
+            ViewBag.Passion = rec6Cnt;
+            ViewBag.Balance = rec7Cnt;
+
+            return View(rec.ToList());
         }
     }
 }

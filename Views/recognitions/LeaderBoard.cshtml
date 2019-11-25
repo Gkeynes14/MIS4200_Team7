@@ -1,0 +1,88 @@
+﻿@model IEnumerable<MIS4200_Team7.Models.recognition>
+
+@{
+    ViewBag.Title = "LeaderBoard";
+}
+
+<h2>LeaderBoard</h2>
+
+@{
+    var total = ViewBag.total;
+    var excellence = ViewBag.Excellence;
+    var culture = ViewBag.Culture;
+    var integrity = ViewBag.Integrity;
+    var stewardship = ViewBag.Stewardship;
+    var innovate = ViewBag.Innovate;
+    var passion = ViewBag.Passion;
+    var balance = ViewBag.Balance;
+}
+
+
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserProfile.fullName)
+            </th>
+            <th>
+                Total Recognitions
+            </th>
+            <th>
+                Excellence
+            </th>
+            <th>
+                Culture
+            </th>
+            <th>
+                Integrity
+            </th>
+            <th>
+                Stewardship
+            </th>
+            <th>
+                Innovate
+            </th>
+            <th>
+                Passion
+            </th>
+            <th>
+                Balance
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserProfile.fullName)
+        </td>
+        <td>
+            @total
+        </td>
+        <td>
+            @excellence
+        </td>
+        <td>
+            @culture
+        </td>
+        <td>
+            @integrity
+        </td>
+        <td>
+            @stewardship
+        </td>
+        <td>
+            @innovate
+        </td>
+        <td>
+            @passion
+        </td>
+        <td>
+            @balance
+        </td>
+    </tr>
+        }
+
+    </table>

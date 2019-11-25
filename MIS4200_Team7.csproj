@@ -270,13 +270,14 @@
     <Content Include="Views\values\Details.cshtml" />
     <Content Include="Views\values\Edit.cshtml" />
     <Content Include="Views\values\Index.cshtml" />
+    <Content Include="Views\Shared\NotAuthorized.cshtml" />
+    <Content Include="Views\ProfileDetailRecognitions.cshtml" />
     <Content Include="Views\recognitions\Create.cshtml" />
     <Content Include="Views\recognitions\Delete.cshtml" />
     <Content Include="Views\recognitions\Details.cshtml" />
     <Content Include="Views\recognitions\Edit.cshtml" />
     <Content Include="Views\recognitions\Index.cshtml" />
-    <Content Include="Views\userProfiles\NotAuthorized.cshtml" />
-    <Content Include="Views\ProfileDetailRecognitions.cshtml" />
+    <Content Include="Views\recognitions\LeaderBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
