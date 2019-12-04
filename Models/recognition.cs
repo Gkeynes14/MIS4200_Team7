@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -15,11 +16,14 @@ namespace MIS4200_Team7.Models
         //person recognizing
         [Display(Name = "Recognizer")]
         public Guid recognizerID { get; set; }
+        [ForeignKey("recognizerID")]
+        public virtual userProfile recognitionName { get; set; }
 
         //person being recognized
         [Display(Name = "Employee Being Recognized")]
         [Required]
         public Guid profileID { get; set; }
+        [ForeignKey("profileID")]
         public virtual userProfile UserProfile { get; set; }
 
         //extra comments

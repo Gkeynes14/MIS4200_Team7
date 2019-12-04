@@ -64,20 +64,76 @@
     var innovate = ViewBag.Innovate;
     var passion = ViewBag.Passion;
     var balance = ViewBag.Balance;
-    <h2>Total recognitions received = @total</h2>
-    <h3>Excellence awards = @excellence</h3>
-    <h3>Culture awards = @culture</h3>
-    <h3>Integrity awards = @integrity</h3>
-    <h3>Stewardship awards = @stewardship</h3>
-    <h3>Innovate awards = @innovate</h3>
-    <h3>Passion awards = @passion</h3>
-    <h3>Balance awards = @balance</h3>
 }
-    <h3>@Html.ActionLink("View Recognitions", "Index", "Recognitions", new { @searchString = Model.firstName}, null) </h3>
+<table class="table">
+    <tr>
+        <th>
+            Total Recognitions
+        </th>
+        <th>
+            Excellence
+        </th>
+        <th>
+            Culture
+        </th>
+        <th>
+            Integrity
+        </th>
+        <th>
+            Stewardship
+        </th>
+        <th>
+            Innovate
+        </th>
+        <th>
+            Passion
+        </th>
+        <th>
+            Balance
+        </th>
+        <th>
+            Recognition Details
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @total
+        </td>
+        <td>
+            @excellence
+        </td>
+        <td>
+            @culture
+        </td>
+        <td>
+            @integrity
+        </td>
+        <td>
+            @stewardship
+        </td>
+        <td>
+            @innovate
+        </td>
+        <td>
+            @passion
+        </td>
+        <td>
+            @balance
+        </td>
+        <td>
+            @Html.ActionLink("View Recognitions", "Index", "Recognitions", new { @searchString = Model.firstName }, null)
+        </td>
+    </tr>
+
+</table>
 
 
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.profileID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    
+
+
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.profileID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
