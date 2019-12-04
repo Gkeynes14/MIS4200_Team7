@@ -16,14 +16,13 @@ namespace MIS4200_Team7.Models
         //person recognizing
         [Display(Name = "Recognizer")]
         public Guid recognizerID { get; set; }
-        [ForeignKey("recognizerID")]
-        public virtual userProfile recognitionName { get; set; }
-
+        
+        
         //person being recognized
         [Display(Name = "Employee Being Recognized")]
         [Required]
         public Guid profileID { get; set; }
-        [ForeignKey("profileID")]
+        
         public virtual userProfile UserProfile { get; set; }
 
         //extra comments
