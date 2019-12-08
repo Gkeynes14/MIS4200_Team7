@@ -22,13 +22,26 @@ namespace MIS4200_Team7.Controllers
             
             if (User.Identity.IsAuthenticated)
             {
-                var testusers = from u in db.recognitions select u;
+                var userSearch = from u in db.recognitions select u;
+                string[] userNames;
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    
-                    testusers = testusers.Where(u => u.UserProfile.lastName.Contains(searchString) || u.UserProfile.firstName.Contains(searchString));
-                    // if here, users were found so view them
-                    return View(testusers.ToList());
+
+                    userNames = searchString.Split(' '); // split the string on spaces
+                    if (userNames.Count() == 1) // there is only one string so it could be
+                                                // either the first or last name
+                    {
+                        userSearch = userSearch.Where(c => c.UserProfile.lastName.Contains(searchString) ||
+                       c.UserProfile.firstName.Contains(searchString)).OrderBy(c => c.UserProfile.lastName);
+                    }
+                    else //if you get here there were at least two strings so extract them and test
+                    {
+                        string s1 = userNames[0];
+                        string s2 = userNames[1];
+                        userSearch = userSearch.Where(c => c.UserProfile.lastName.Contains(s2) &&
+                       c.UserProfile.firstName.Contains(s1)).OrderBy(c => c.UserProfile.lastName); // note that this uses &&, not ||
+                    }
+                    return View(userSearch.ToList());
                 }
                 return View(db.recognitions.ToList());
             }
@@ -102,8 +115,17 @@ namespace MIS4200_Team7.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
-            return View(recognition);
+            Guid memberID;
+            Guid.TryParse(User.Identity.GetUserId(), out memberID);
+            if (recognition.recognizerID == memberID)
+            {
+                ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
+                return View(recognition);
+            }
+            else
+            {
+                return View("NotRecognitionAuthor");
+            }
         }
 
         // POST: recognitions/Edit/5
@@ -138,7 +160,17 @@ namespace MIS4200_Team7.Controllers
             {
                 return HttpNotFound();
             }
-            return View(recognition);
+            Guid memberID;
+            Guid.TryParse(User.Identity.GetUserId(), out memberID);
+            if (recognition.recognizerID == memberID)
+            {
+                ViewBag.profileID = new SelectList(db.userProfiles, "profileID", "fullName", recognition.profileID);
+                return View(recognition);
+            }
+            else
+            {
+                return View("NotRecognitionAuthor");
+            }
         }
 
         // POST: recognitions/Delete/5

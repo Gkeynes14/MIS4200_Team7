@@ -13,6 +13,8 @@
         <input type="submit" value="Search" />
     </p>
 }
+<br />
+
 
 <p>
 
@@ -20,17 +22,21 @@
 <table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Position.positionTitle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.firstName)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.lastName)
         </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Position.positionTitle)
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.hireDate)
         </th>
@@ -39,28 +45,29 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Position.positionTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.firstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hireDate)
-            </td>
-            <td>
-                
-                @Html.ActionLink("Details", "Details", new { id = item.profileID }) 
-                
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.firstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.lastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Position.positionTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.hireDate)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.profileID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.profileID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.profileID })
+
+    </td>
+</tr>
     }
 
 </table>

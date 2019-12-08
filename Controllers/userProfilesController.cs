@@ -22,14 +22,26 @@ namespace MIS4200_Team7.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                var testusers = from u in db.userProfiles select u;
+                var userSearch = from u in db.userProfiles select u;
+                string[] userNames;
                 if (!String.IsNullOrEmpty(searchString))
                 {
-                    testusers = testusers.Where(u =>
-                   u.lastName.Contains(searchString)
-                   || u.firstName.Contains(searchString));
-                    // if here, users were found so view them
-                    return View(testusers.ToList());
+
+                    userNames = searchString.Split(' '); // split the string on spaces
+                    if (userNames.Count() == 1) // there is only one string so it could be
+                                                // either the first or last name
+                    {
+                        userSearch = userSearch.Where(c => c.lastName.Contains(searchString) ||
+                       c.firstName.Contains(searchString)).OrderBy(c => c.lastName);
+                    }
+                    else //if you get here there were at least two strings so extract them and test
+                    {
+                        string s1 = userNames[0];
+                        string s2 = userNames[1];
+                        userSearch = userSearch.Where(c => c.lastName.Contains(s2) &&
+                       c.firstName.Contains(s1)).OrderBy(c => c.lastName); // note that this uses &&, not ||
+                    }
+                    return View(userSearch.ToList());
                 }
                 return View(db.userProfiles.ToList());
             }
@@ -126,8 +138,17 @@ namespace MIS4200_Team7.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.positionID = new SelectList(db.positions, "positionID", "positionTitle", userProfile.positionID);
-            return View(userProfile);
+            Guid memberID;
+            Guid.TryParse(User.Identity.GetUserId(), out memberID);
+            if (userProfile.profileID == memberID)
+            {
+                ViewBag.positionID = new SelectList(db.positions, "positionID", "positionTitle", userProfile.positionID);
+                return View(userProfile);
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
         }
 
         // POST: userProfiles/Edit/5
@@ -159,7 +180,17 @@ namespace MIS4200_Team7.Controllers
             {
                 return HttpNotFound();
             }
-            return View(userProfile);
+            Guid memberID;
+            Guid.TryParse(User.Identity.GetUserId(), out memberID);
+            if (userProfile.profileID == memberID)
+            {
+                ViewBag.positionID = new SelectList(db.positions, "positionID", "positionTitle", userProfile.positionID);
+                return View(userProfile);
+            }
+            else
+            {
+                return View("NotAuthenticated");
+            }
         }
 
         // POST: userProfiles/Delete/5

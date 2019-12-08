@@ -4,28 +4,11 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details Test</h2>
+<h2>Employee Details</h2>
 
 <div>
-    <h4>User Profile</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Position.positionTitle)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Position.positionTitle)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.email)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.firstName)
         </dt>
@@ -41,7 +24,23 @@
         <dd>
             @Html.DisplayFor(model => model.lastName)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Position.positionTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position.positionTitle)
+        </dd>
+        
         <dt>
             @Html.DisplayNameFor(model => model.hireDate)
         </dt>
@@ -121,7 +120,7 @@
             @balance
         </td>
         <td>
-            @Html.ActionLink("View Recognitions", "Index", "Recognitions", new { @searchString = Model.firstName }, null)
+            @Html.ActionLink("View Recognitions", "Index", "Recognitions", new { @searchString = Model.firstName + ' ' + Model.lastName }, null)
         </td>
     </tr>
 

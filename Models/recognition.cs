@@ -16,8 +16,7 @@ namespace MIS4200_Team7.Models
         //person recognizing
         [Display(Name = "Recognizer")]
         public Guid recognizerID { get; set; }
-        
-        
+
         //person being recognized
         [Display(Name = "Employee Being Recognized")]
         [Required]

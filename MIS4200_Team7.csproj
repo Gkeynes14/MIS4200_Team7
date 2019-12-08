@@ -278,6 +278,8 @@
     <Content Include="Views\recognitions\Edit.cshtml" />
     <Content Include="Views\recognitions\Index.cshtml" />
     <Content Include="Views\recognitions\LeaderBoard.cshtml" />
+    <Content Include="Views\Shared\NotAuthenticated.cshtml" />
+    <Content Include="Views\Shared\NotRecognitionAuthor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
